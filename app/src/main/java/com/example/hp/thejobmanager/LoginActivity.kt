@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -36,7 +37,13 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
         setContentView(R.layout.activity_login)
 
 
+
+
         val signIn = findViewById<View>(R.id.google_button) as SignInButton
+        val signOut:Button = this.findViewById(R.id.logout)
+
+        signOut.setOnClickListener { signOut() }
+
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -49,6 +56,16 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
         auth = FirebaseAuth.getInstance()
     }
+    private fun signOut() {
+        FirebaseAuth.getInstance().signOut()
+        mGoogleSignInClient.signOut()
+
+        Toast.makeText(this, "logged out", Toast.LENGTH_LONG).show()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
+
     private fun signIn () {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">The Job Manager</string>
+    <string name="title_activity_add_job">AddJobActivity</string>
 </resources>

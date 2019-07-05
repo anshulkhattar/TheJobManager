@@ -5,6 +5,12 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class SpinnerActivity : AppCompatActivity() {
 
@@ -12,8 +18,8 @@ class SpinnerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spinner)
 
-        var spinner: Spinner = this.findViewById(R.id.spinner)
 
+        var spinner: Spinner = this.findViewById(R.id.spinner)
 
 
 
@@ -42,10 +48,48 @@ class SpinnerActivity : AppCompatActivity() {
                 // Display the selected item text on text view
 
                 if(parent.getItemAtPosition(position)=="Supervisor") {
-                    callSupervisor()
+
+                    //Check if user exists in database and directly go to jobs screen
+                    val ref = FirebaseDatabase.getInstance().getReference("Supervisor").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    ref.addValueEventListener(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError?) {
+                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        }
+
+
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                goToCreateJobs()
+                            }
+                            else{
+                                callSupervisor()
+                            }
+                        }
+
+
+                    })
+
+
                 }
                 else if(parent.getItemAtPosition(position)=="Worker"){
-                    callWorker()
+                    val ref = FirebaseDatabase.getInstance().getReference("Worker").child(FirebaseAuth.getInstance().currentUser!!.uid)
+                    ref.addValueEventListener(object : ValueEventListener {
+                        override fun onCancelled(p0: DatabaseError?) {
+                            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        }
+
+
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                goToWorkerJobs()
+                            }
+                            else{
+                                callWorker()
+                            }
+                        }
+
+
+                    })
                 }
                 else{
 
@@ -61,6 +105,15 @@ class SpinnerActivity : AppCompatActivity() {
         }
 
     }
+    fun goToWorkerJobs(){
+        val intent = Intent(this, WorkerJobsDisplayActivity::class.java)
+        startActivity(intent)
+    }
+    fun goToCreateJobs(){
+        val intent = Intent(this, AddJobActivity::class.java)
+        startActivity(intent)
+    }
+
     fun callSupervisor(){
         val intent = Intent(this, SupervisorDetailsActivity::class.java)
         startActivity(intent)
