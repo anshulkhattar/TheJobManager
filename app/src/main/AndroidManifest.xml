@@ -25,9 +25,13 @@
         <activity
                 android:name=".AddJobActivity"
                 android:label="@string/title_activity_add_job"
-                android:theme="@style/AppTheme">
+                android:theme="@style/AppTheme"
+                >
         </activity>
         <activity android:name=".WorkerJobsDisplayActivity">
+        </activity>
+        <activity android:name=".NewJobActivity"
+                  android:windowSoftInputMode="stateVisible|adjustPan">
         </activity>
     </application>
 
