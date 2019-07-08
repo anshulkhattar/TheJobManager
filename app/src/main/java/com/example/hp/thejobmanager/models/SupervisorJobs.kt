@@ -1,4 +1,4 @@
-package com.example.hp.thejobmanager
+package com.example.hp.thejobmanager.models
 
 class SupervisorJobs {
     var jprofile:String=""

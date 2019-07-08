@@ -18,9 +18,9 @@
         </activity>
         <activity android:name=".SpinnerActivity">
         </activity>
-        <activity android:name=".SupervisorDetailsActivity">
+        <activity android:name=".userDetailActivities.SupervisorDetailsActivity">
         </activity>
-        <activity android:name=".WorkerDetailsActivity">
+        <activity android:name=".userDetailActivities.WorkerDetailsActivity">
         </activity>
         <activity
                 android:name=".AddJobActivity"

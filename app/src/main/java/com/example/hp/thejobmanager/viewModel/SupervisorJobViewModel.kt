@@ -3,8 +3,7 @@ package com.example.hp.thejobmanager.viewModel
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.util.Log
-import com.example.hp.thejobmanager.Supervisor
-import com.example.hp.thejobmanager.SupervisorJobs
+import com.example.hp.thejobmanager.models.SupervisorJobs
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -24,7 +23,7 @@ class SupervisorJobViewModel:ViewModel {
 
     constructor()
 
-    constructor(job:SupervisorJobs) : super() {
+    constructor(job: SupervisorJobs) : super() {
         this.jprofile = job.jprofile
         this.jduration = job.jduration
         this.jpayment = job.jpayment
