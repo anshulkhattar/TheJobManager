@@ -27,7 +27,7 @@ class AddJobActivity : AppCompatActivity() {
         jobListViewModel.getArrayList().observe(this, android.arch.lifecycle.Observer {jobListViewModel->
 
             var jobAdapter = SupervisorJobAdapter(this@AddJobActivity, jobListViewModel!!)
-            recyclerview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recyclerview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
             //recyclerview!!.layoutManager = LinearLayoutManager(this@JobListActivity)
             recyclerview!!.adapter = jobAdapter
