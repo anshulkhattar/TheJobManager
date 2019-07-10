@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat.getSystemService
 import android.util.Log
 import com.example.hp.thejobmanager.MyLocation
 import com.example.hp.thejobmanager.models.SupervisorJobs
+import com.example.hp.thejobmanager.models.Worker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -35,6 +36,8 @@ class WorkerJobViewModel:ViewModel {
     var jlocation:String=""
     var jdate:String=""
     var jstatus:String=""
+    var jlat:Double=0.0
+    var jlong:Double=0.0
 
     constructor()
 
@@ -49,7 +52,16 @@ class WorkerJobViewModel:ViewModel {
         this.jlocation = job.jlocation
         this.jdate = job.jdate
         this.jstatus = job.jstatus
+        this.jlong=job.jlong
+        this.jlat=job.jlat
     }
+
+    var wlat:Double=0.0
+    var wlong:Double=0.0
+    var jlatitude:Double=0.0
+    var jlongitude:Double=0.0
+    var radius:Double=0.0
+
 
     var arrayListMutableLiveData= MutableLiveData<ArrayList<WorkerJobViewModel>>()
 
@@ -58,6 +70,22 @@ class WorkerJobViewModel:ViewModel {
 
 
     fun getArrayList(): MutableLiveData<ArrayList<WorkerJobViewModel>> {
+
+        var userListener=FirebaseDatabase.getInstance().getReference("Worker").child(FirebaseAuth.getInstance().currentUser!!.uid)
+        userListener.addValueEventListener(object:ValueEventListener{
+            override fun onCancelled(p0: DatabaseError?) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot?) {
+                if(p0!!.exists()){
+                    var worker=p0.getValue(Worker::class.java)
+
+                    wlat=worker!!.ulat
+                    wlong=worker!!.ulong
+                }
+            }
+        })
 
         Log.d("1111","reached 1")
         val jobListener = FirebaseDatabase.getInstance().getReference("SJob")
@@ -72,13 +100,33 @@ class WorkerJobViewModel:ViewModel {
                     for (jobSnapshot in dataSnapshot.children) {
                         var job: SupervisorJobs = jobSnapshot.getValue(SupervisorJobs::class.java)!!
 
-                        var jobs= WorkerJobViewModel(job)
+                        jlatitude=job.jlat
+                        jlongitude=job.jlong
 
-                        arrayList!!.add(jobs)
+                        radius=job.jrange.toDouble()
 
-                        Log.d("333","reached 3")
 
-                        arrayListMutableLiveData.value=arrayList
+                        var dist = FloatArray(1)
+
+                        Location.distanceBetween(
+                            jlatitude,
+                            jlongitude,
+                            wlat,
+                            wlong,
+                            dist
+                        )
+                        if (dist[0] / 1000 < radius) {
+                            //here your code or alert box for outside 1Km radius area
+
+                            var jobs= WorkerJobViewModel(job)
+
+                            arrayList!!.add(jobs)
+
+                            Log.d("333","reached 3")
+
+                            arrayListMutableLiveData.value=arrayList
+                            
+                        }
 
 
                     }

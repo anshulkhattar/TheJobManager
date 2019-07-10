@@ -18,7 +18,6 @@ import android.util.Log
 import android.widget.Toast
 import com.example.hp.thejobmanager.adapters.SupervisorJobAdapter
 import com.example.hp.thejobmanager.adapters.WorkerJobAdapter
-import com.example.hp.thejobmanager.userDetailActivities.Worker
 import com.example.hp.thejobmanager.viewModel.WorkerJobViewModel
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest

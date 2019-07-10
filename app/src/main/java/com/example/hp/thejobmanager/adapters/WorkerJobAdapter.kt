@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.hp.thejobmanager.R
 import com.example.hp.thejobmanager.databinding.WorkerJobCardBinding
-import com.example.hp.thejobmanager.userDetailActivities.Worker
 import com.example.hp.thejobmanager.viewModel.WorkerJobViewModel
 
 class WorkerJobAdapter(private val context: Context, private val arrayList: ArrayList<WorkerJobViewModel>):

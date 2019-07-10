@@ -5,10 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.util.Log
 import com.example.hp.thejobmanager.models.SupervisorJobs
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 
 class SupervisorJobViewModel:ViewModel {
 
@@ -20,6 +17,8 @@ class SupervisorJobViewModel:ViewModel {
     var jlocation:String=""
     var jdate:String=""
     var jstatus:String=""
+    var jlat:Double=0.0
+    var jlong:Double=0.0
 
     constructor()
 
@@ -32,6 +31,8 @@ class SupervisorJobViewModel:ViewModel {
         this.jlocation = job.jlocation
         this.jdate = job.jdate
         this.jstatus = job.jstatus
+        this.jlat=jlat
+        this.jlong=jlong
     }
 
     var arrayListMutableLiveData= MutableLiveData<ArrayList<SupervisorJobViewModel>>()
@@ -89,6 +90,5 @@ class SupervisorJobViewModel:ViewModel {
 
         return arrayListMutableLiveData
     }
-
 
 }

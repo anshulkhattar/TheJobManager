@@ -6,6 +6,10 @@
                 name="supervisorjobmodel"
                 type="com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel"
         />
+        <variable
+                name="supervisorjob"
+                type="com.example.hp.thejobmanager.adapters.SupervisorJobAdapter"
+        />
     </data>
 <android.support.constraint.ConstraintLayout
                                               android:layout_width="match_parent"

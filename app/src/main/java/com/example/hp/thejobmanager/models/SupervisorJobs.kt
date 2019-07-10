@@ -9,6 +9,8 @@ class SupervisorJobs {
     var jlocation:String=""
     var jdate:String=""
     var jstatus:String=""
+    var jlat:Double=0.0
+    var jlong:Double=0.0
 
     constructor()
     constructor(
@@ -19,7 +21,9 @@ class SupervisorJobs {
         jrange: String,
         jlocation: String,
         jdate: String,
-        jstatus: String
+        jstatus: String,
+        jlat:Double,
+        jlong:Double
     ) : super() {
         this.jprofile = jprofile
         this.jduration = jduration
@@ -29,5 +33,7 @@ class SupervisorJobs {
         this.jlocation = jlocation
         this.jdate = jdate
         this.jstatus = jstatus
+        this.jlat=jlat
+        this.jlong=jlong
     }
 }

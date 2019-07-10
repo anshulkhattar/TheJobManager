@@ -8,7 +8,9 @@ import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import javax.xml.datatype.Duration
+import android.location.Geocoder
+import java.util.*
+
 
 class NewJobActivity : AppCompatActivity() {
 
@@ -36,11 +38,18 @@ class NewJobActivity : AppCompatActivity() {
         var date: String = mDate.text.toString()
 
 
+        val geocoder = Geocoder(this, Locale.getDefault())
+        val addresses = geocoder.getFromLocationName(location, 1)
+        val address = addresses[0]
+        val longitude = address.longitude
+        val latitude = address.latitude
+
+
 
         if (!profile.isEmpty() && !duration.isEmpty() && !location.isEmpty() && !range.isEmpty() && !payment.isEmpty() && !date.isEmpty()) {
             var currUser=FirebaseAuth.getInstance().currentUser!!.uid
             var jobStatus:String="New"
-            var job = Job(profile, duration, location, range, payment, date, currUser, jobStatus)
+            var job = Job(profile, duration, location, range, payment, date, currUser, jobStatus,latitude,longitude)
             FirebaseDatabase.getInstance().getReference("SJob")
                 .push()
                 .setValue(job)
@@ -58,4 +67,15 @@ class NewJobActivity : AppCompatActivity() {
         }
     }
 }
-data class Job(var jProfile:String,var jDuration:String,var jLocation:String,var jRange:String,var jPayment:String,var jDate:String,var jCreator:String,var jStatus:String)
+data class Job(
+    var jProfile:String,
+    var jDuration:String,
+    var jLocation:String,
+    var jRange:String,
+    var jPayment:String,
+    var jDate:String,
+    var jCreator:String,
+    var jStatus:String,
+    var jlat:Double,
+    var jlong: Double
+)
