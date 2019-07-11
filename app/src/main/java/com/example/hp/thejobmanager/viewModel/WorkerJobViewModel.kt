@@ -62,6 +62,8 @@ class WorkerJobViewModel:ViewModel {
     var jlongitude:Double=0.0
     var radius:Double=0.0
 
+    val keyList = ArrayList<String>()
+
 
     var arrayListMutableLiveData= MutableLiveData<ArrayList<WorkerJobViewModel>>()
 
@@ -98,6 +100,8 @@ class WorkerJobViewModel:ViewModel {
                     Log.d("222","reached 2")
 
                     for (jobSnapshot in dataSnapshot.children) {
+                        keyList.add(jobSnapshot.child("jid").value as String)
+                        Log.d("jid",keyList.toString())
                         var job: SupervisorJobs = jobSnapshot.getValue(SupervisorJobs::class.java)!!
 
                         jlatitude=job.jlat
@@ -155,6 +159,8 @@ class WorkerJobViewModel:ViewModel {
 
         return arrayListMutableLiveData
     }
-
+    fun getKey(): ArrayList<String> {
+        return keyList
+    }
 
 }

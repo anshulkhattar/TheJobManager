@@ -36,9 +36,12 @@ class WorkerJobsDisplayActivity : AppCompatActivity() {
 
         var jobListViewModel: WorkerJobViewModel = ViewModelProviders.of(this).get(WorkerJobViewModel::class.java)
 
+        var keys:ArrayList<String>
+        keys=jobListViewModel.getKey()
+
         jobListViewModel.getArrayList().observe(this, android.arch.lifecycle.Observer {jobListViewModel->
 
-            var jobAdapter = WorkerJobAdapter(this@WorkerJobsDisplayActivity, jobListViewModel!!)
+            var jobAdapter = WorkerJobAdapter(this@WorkerJobsDisplayActivity, jobListViewModel!!,keys)
             recyclerview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
             //recyclerview!!.layoutManager = LinearLayoutManager(this@JobListActivity)
