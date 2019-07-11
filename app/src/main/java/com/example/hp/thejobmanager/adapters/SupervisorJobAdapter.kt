@@ -1,22 +1,28 @@
 package com.example.hp.thejobmanager.adapters
 
+import android.app.DownloadManager
 import android.content.Context
-import android.databinding.BindingAdapter
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.*
 import com.example.hp.thejobmanager.R
 import com.example.hp.thejobmanager.databinding.SupervisorJobCardBinding
 import com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.supervisorjobcard.view.*
+import android.widget.TextView
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
 
 
-class SupervisorJobAdapter(private val context: Context, private val arrayList: ArrayList<SupervisorJobViewModel>):
+
+
+class SupervisorJobAdapter(private val context: Context, private val arrayList: ArrayList<SupervisorJobViewModel>,private val keyList:ArrayList<String>):
     RecyclerView.Adapter<SupervisorJobAdapter.customView>() {
 
 
@@ -28,11 +34,10 @@ class SupervisorJobAdapter(private val context: Context, private val arrayList: 
         val jobdisplaydesignBinding: SupervisorJobCardBinding = DataBindingUtil.inflate(layoutInflater,
             R.layout.supervisorjobcard,parent,false)
 
+
+
         return customView(jobdisplaydesignBinding)
     }
-
-
-
 
 
     override fun getItemCount(): Int {
@@ -46,18 +51,54 @@ class SupervisorJobAdapter(private val context: Context, private val arrayList: 
         val jobListViewModel:SupervisorJobViewModel=arrayList[position]
         holder.bind(jobListViewModel)
 
+
+        holder.jobdisplaydesignBinding.delete.setOnClickListener {
+
+            Log.d("p11", "position is$position")
+
+            var key=keyList[position]
+
+            Log.d("k11",key)
+
+           var ref=FirebaseDatabase.getInstance().getReference("SJob").orderByChild("jid").equalTo(key)
+            Log.d("ref11",ref.toString())
+
+            ref.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    Log.d("d44", dataSnapshot.toString())
+                    if (dataSnapshot.exists()) {
+                        Log.d("d33", "reached here")
+                        for (jobSnapshot in dataSnapshot.children) {
+                            Log.d("d22", jobSnapshot.toString())
+                            jobSnapshot.ref.setValue(null)
+                        }
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.e("f111", "onCancelled", databaseError.toException())
+                }
+            })
+            Log.d("key111", keyList[position])
+            //jobListViewModel.keyList.removeAt(position)
+
+            //jobListViewModel.items.removeAt(position)
+
+
+
+
+            Log.d("d11","del pressed")
+        }
+
     }
 
-
-
     class customView(val jobdisplaydesignBinding: SupervisorJobCardBinding):RecyclerView.ViewHolder(jobdisplaydesignBinding.root){
-
 
         fun bind(jobListViewModel: SupervisorJobViewModel){
 
             this.jobdisplaydesignBinding.supervisorjobmodel=jobListViewModel
             jobdisplaydesignBinding.executePendingBindings()
         }
+
 
 
 

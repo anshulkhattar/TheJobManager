@@ -11,6 +11,7 @@ class SupervisorJobs {
     var jstatus:String=""
     var jlat:Double=0.0
     var jlong:Double=0.0
+    var jid:String=""
 
     constructor()
     constructor(
@@ -23,7 +24,8 @@ class SupervisorJobs {
         jdate: String,
         jstatus: String,
         jlat:Double,
-        jlong:Double
+        jlong:Double,
+        jid:String
     ) : super() {
         this.jprofile = jprofile
         this.jduration = jduration
@@ -35,5 +37,6 @@ class SupervisorJobs {
         this.jstatus = jstatus
         this.jlat=jlat
         this.jlong=jlong
+        this.jid=jid
     }
 }

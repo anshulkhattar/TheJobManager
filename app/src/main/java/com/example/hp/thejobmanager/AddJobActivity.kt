@@ -24,11 +24,15 @@ class AddJobActivity : AppCompatActivity() {
         add.setOnClickListener { val intent = Intent(this, NewJobActivity::class.java)
             startActivity(intent) }
 
+
         var jobListViewModel: SupervisorJobViewModel = ViewModelProviders.of(this).get(SupervisorJobViewModel::class.java)
+
+        var keys:ArrayList<String>
+        keys=jobListViewModel.getKey()
 
         jobListViewModel.getArrayList().observe(this, android.arch.lifecycle.Observer {jobListViewModel->
 
-            var jobAdapter = SupervisorJobAdapter(this@AddJobActivity, jobListViewModel!!)
+            var jobAdapter = SupervisorJobAdapter(this@AddJobActivity, jobListViewModel!!,keys)
             recyclerview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
 

@@ -125,7 +125,7 @@ class WorkerJobViewModel:ViewModel {
                             Log.d("333","reached 3")
 
                             arrayListMutableLiveData.value=arrayList
-                            
+
                         }
 
 

@@ -10,6 +10,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import android.location.Geocoder
 import java.util.*
+import kotlin.collections.ArrayList
+import com.google.firebase.database.DatabaseError
+import android.databinding.adapters.NumberPickerBindingAdapter.setValue
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
+
+
 
 
 class NewJobActivity : AppCompatActivity() {
@@ -38,6 +45,7 @@ class NewJobActivity : AppCompatActivity() {
         var date: String = mDate.text.toString()
 
 
+
         val geocoder = Geocoder(this, Locale.getDefault())
         val addresses = geocoder.getFromLocationName(location, 1)
         val address = addresses[0]
@@ -46,13 +54,14 @@ class NewJobActivity : AppCompatActivity() {
 
 
 
+
         if (!profile.isEmpty() && !duration.isEmpty() && !location.isEmpty() && !range.isEmpty() && !payment.isEmpty() && !date.isEmpty()) {
             var currUser=FirebaseAuth.getInstance().currentUser!!.uid
             var jobStatus:String="New"
-            var job = Job(profile, duration, location, range, payment, date, currUser, jobStatus,latitude,longitude)
-            FirebaseDatabase.getInstance().getReference("SJob")
-                .push()
-                .setValue(job)
+            var ref=FirebaseDatabase.getInstance().getReference("SJob")
+            var id=ref.push().key
+            var job = Job(profile, duration, location, range, payment, date, currUser, jobStatus,latitude,longitude,id)
+            ref.child(id).setValue(job)
 
 
             Toast.makeText(this, "Job Added", Toast.LENGTH_SHORT).show()
@@ -77,5 +86,6 @@ data class Job(
     var jCreator:String,
     var jStatus:String,
     var jlat:Double,
-    var jlong: Double
+    var jlong: Double,
+    var jid:String
 )

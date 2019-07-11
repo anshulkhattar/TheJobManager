@@ -19,6 +19,7 @@ class SupervisorJobViewModel:ViewModel {
     var jstatus:String=""
     var jlat:Double=0.0
     var jlong:Double=0.0
+    var jid:String=""
 
     constructor()
 
@@ -33,17 +34,23 @@ class SupervisorJobViewModel:ViewModel {
         this.jstatus = job.jstatus
         this.jlat=jlat
         this.jlong=jlong
+        this.jid=jid
     }
+
+    val keyList = ArrayList<String>()
+    val items = ArrayList<SupervisorJobs>()
 
     var arrayListMutableLiveData= MutableLiveData<ArrayList<SupervisorJobViewModel>>()
 
     var arrayList=ArrayList<SupervisorJobViewModel>()
 
+    var ref= FirebaseDatabase.getInstance().getReference("SJob")!!
+
     fun getArrayList():MutableLiveData<ArrayList<SupervisorJobViewModel>>{
 
         Log.d("1111","reached 1")
-        val jobListener = FirebaseDatabase.getInstance().getReference("SJob")
-            .orderByChild("jcreator").equalTo(FirebaseAuth.getInstance().currentUser!!.uid)
+
+        val jobListener = ref.orderByChild("jcreator").equalTo(FirebaseAuth.getInstance().currentUser!!.uid)
         jobListener.addValueEventListener(object : ValueEventListener {
 
 
@@ -52,7 +59,12 @@ class SupervisorJobViewModel:ViewModel {
 
                     Log.d("222","reached 2")
 
+
+
                     for (jobSnapshot in dataSnapshot.children) {
+                        keyList.add(jobSnapshot.child("jid").value as String)
+                        Log.d("jid",keyList.toString())
+                        items.add(jobSnapshot.getValue(SupervisorJobs::class.java)!!)
                         var job: SupervisorJobs = jobSnapshot.getValue(SupervisorJobs::class.java)!!
 
                         var jobs= SupervisorJobViewModel(job)
@@ -90,5 +102,7 @@ class SupervisorJobViewModel:ViewModel {
 
         return arrayListMutableLiveData
     }
-
+    fun getKey(): ArrayList<String> {
+        return keyList
+    }
 }
