@@ -57,14 +57,16 @@ class SupervisorJobViewModel:ViewModel {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
 
+
                     Log.d("222","reached 2")
 
-
+                    arrayList.clear()
 
                     for (jobSnapshot in dataSnapshot.children) {
                         keyList.add(jobSnapshot.child("jid").value as String)
                         Log.d("jid",keyList.toString())
                         items.add(jobSnapshot.getValue(SupervisorJobs::class.java)!!)
+
                         var job: SupervisorJobs = jobSnapshot.getValue(SupervisorJobs::class.java)!!
 
                         var jobs= SupervisorJobViewModel(job)

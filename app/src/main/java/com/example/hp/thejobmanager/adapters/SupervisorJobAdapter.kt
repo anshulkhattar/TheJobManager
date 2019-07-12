@@ -3,6 +3,7 @@ package com.example.hp.thejobmanager.adapters
 import android.app.DownloadManager
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,17 +14,21 @@ import com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel
 import kotlinx.android.synthetic.main.supervisorjobcard.view.*
 import android.widget.TextView
 import android.widget.Toast
+import com.example.hp.thejobmanager.AddJobActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
-
-
+import android.support.v4.content.ContextCompat.startActivity
+import android.content.Intent
+import com.example.hp.thejobmanager.NewJobActivity
 
 
 class SupervisorJobAdapter(private val context: Context, private val arrayList: ArrayList<SupervisorJobViewModel>,private val keyList:ArrayList<String>):
     RecyclerView.Adapter<SupervisorJobAdapter.customView>() {
+
+    private val activity : AddJobActivity = context as AddJobActivity
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): customView {
@@ -71,6 +76,12 @@ class SupervisorJobAdapter(private val context: Context, private val arrayList: 
                         for (jobSnapshot in dataSnapshot.children) {
                             Log.d("d22", jobSnapshot.toString())
                             jobSnapshot.ref.setValue(null)
+
+                            arrayList.removeAt(position)
+
+                            notifyDataSetChanged()
+                            //notifyItemRangeChanged(position,itemCount-1)
+
                         }
                     }
                 }
@@ -80,8 +91,6 @@ class SupervisorJobAdapter(private val context: Context, private val arrayList: 
             })
             Log.d("key111", keyList[position])
             //jobListViewModel.keyList.removeAt(position)
-
-            //jobListViewModel.items.removeAt(position)
 
 
 
