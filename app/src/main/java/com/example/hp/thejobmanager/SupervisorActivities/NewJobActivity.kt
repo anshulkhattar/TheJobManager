@@ -1,4 +1,4 @@
-package com.example.hp.thejobmanager
+package com.example.hp.thejobmanager.SupervisorActivities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -9,14 +9,8 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import android.location.Geocoder
+import com.example.hp.thejobmanager.R
 import java.util.*
-import kotlin.collections.ArrayList
-import com.google.firebase.database.DatabaseError
-import android.databinding.adapters.NumberPickerBindingAdapter.setValue
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.ValueEventListener
-
-
 
 
 class NewJobActivity : AppCompatActivity() {
@@ -60,7 +54,19 @@ class NewJobActivity : AppCompatActivity() {
             var jobStatus:String="New"
             var ref=FirebaseDatabase.getInstance().getReference("SJob")
             var id=ref.push().key
-            var job = Job(profile, duration, location, range, payment, date, currUser, jobStatus,latitude,longitude,id)
+            var job = Job(
+                profile,
+                duration,
+                location,
+                range,
+                payment,
+                date,
+                currUser,
+                jobStatus,
+                latitude,
+                longitude,
+                id
+            )
             ref.child(id).setValue(job)
 
 

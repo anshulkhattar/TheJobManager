@@ -2,8 +2,6 @@ package com.example.hp.thejobmanager.userDetailActivities
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -13,21 +11,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hp.thejobmanager.R
-import com.example.hp.thejobmanager.WorkerJobsDisplayActivity
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.LocationRequest
+import com.example.hp.thejobmanager.WorkerActivities.WorkerJobsDisplayActivity
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import android.location.LocationManager
-import android.os.Build
-import android.provider.Settings
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import com.example.hp.thejobmanager.models.Worker
-import com.google.android.gms.common.api.GoogleApi
 import com.google.android.gms.location.FusedLocationProviderClient
 
 

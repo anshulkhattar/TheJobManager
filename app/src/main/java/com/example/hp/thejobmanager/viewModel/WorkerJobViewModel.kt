@@ -1,19 +1,9 @@
 package com.example.hp.thejobmanager.viewModel
 
-import android.annotation.SuppressLint
-import android.app.Service
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.content.Context
-import android.content.Context.LOCATION_SERVICE
-import android.content.Intent
 import android.location.Location
-import android.location.LocationManager
-import android.os.Bundle
-import android.os.IBinder
-import android.support.v4.content.ContextCompat.getSystemService
 import android.util.Log
-import com.example.hp.thejobmanager.MyLocation
 import com.example.hp.thejobmanager.models.SupervisorJobs
 import com.example.hp.thejobmanager.models.Worker
 import com.google.firebase.auth.FirebaseAuth
@@ -21,9 +11,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.android.gms.location.LocationResult
-
-
 
 
 class WorkerJobViewModel:ViewModel {

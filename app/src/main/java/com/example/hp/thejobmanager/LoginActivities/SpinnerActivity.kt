@@ -1,10 +1,13 @@
-package com.example.hp.thejobmanager
+package com.example.hp.thejobmanager.LoginActivities
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.example.hp.thejobmanager.R
+import com.example.hp.thejobmanager.SupervisorActivities.AddJobActivity
+import com.example.hp.thejobmanager.WorkerActivities.WorkerJobsDisplayActivity
 import com.example.hp.thejobmanager.userDetailActivities.SupervisorDetailsActivity
 import com.example.hp.thejobmanager.userDetailActivities.WorkerDetailsActivity
 import com.google.firebase.auth.FirebaseAuth
