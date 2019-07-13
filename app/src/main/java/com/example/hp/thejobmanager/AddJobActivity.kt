@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.widget.Button
 import com.example.hp.thejobmanager.adapters.SupervisorJobAdapter
 import com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel
@@ -14,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class AddJobActivity : AppCompatActivity() {
 
+    lateinit var jobAdapter:SupervisorJobAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_job)
@@ -30,16 +32,17 @@ class AddJobActivity : AppCompatActivity() {
         var keys:ArrayList<String>
         keys=jobListViewModel.getKey()
 
+
+
         jobListViewModel.getArrayList().observe(this, android.arch.lifecycle.Observer {jobListViewModel->
 
-            var jobAdapter = SupervisorJobAdapter(this@AddJobActivity, jobListViewModel!!,keys)
+            jobAdapter = SupervisorJobAdapter(this@AddJobActivity, jobListViewModel!!,keys)
             recyclerview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
 
             //recyclerview!!.layoutManager = LinearLayoutManager(this@JobListActivity)
             recyclerview!!.adapter = jobAdapter
         })
-
 
     }
 

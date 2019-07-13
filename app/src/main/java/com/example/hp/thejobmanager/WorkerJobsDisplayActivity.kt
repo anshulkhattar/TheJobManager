@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
 import android.widget.Toast
 import com.example.hp.thejobmanager.adapters.SupervisorJobAdapter
@@ -24,6 +25,8 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 
 class WorkerJobsDisplayActivity : AppCompatActivity() {
+
+    lateinit var jobAdapter:WorkerJobAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,12 +44,21 @@ class WorkerJobsDisplayActivity : AppCompatActivity() {
 
         jobListViewModel.getArrayList().observe(this, android.arch.lifecycle.Observer {jobListViewModel->
 
-            var jobAdapter = WorkerJobAdapter(this@WorkerJobsDisplayActivity, jobListViewModel!!,keys)
+            jobAdapter = WorkerJobAdapter(this@WorkerJobsDisplayActivity, jobListViewModel!!,keys)
             recyclerview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
             //recyclerview!!.layoutManager = LinearLayoutManager(this@JobListActivity)
             recyclerview!!.adapter = jobAdapter
         })
+        val swipeHandler = object : SwipeToDeleteCallback(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+
+                jobAdapter.removeAt(viewHolder.adapterPosition)
+                Toast.makeText(this@WorkerJobsDisplayActivity,"Job skipped",Toast.LENGTH_SHORT).show()
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(recyclerview)
     }
 
 }

@@ -139,4 +139,9 @@ class WorkerJobAdapter(private val context: Context, private val arrayList: Arra
         }
 
     }
+
+    fun removeAt(position: Int) {
+        arrayList.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }
