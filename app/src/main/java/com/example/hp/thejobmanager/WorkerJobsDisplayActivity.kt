@@ -3,6 +3,7 @@ package com.example.hp.thejobmanager
 import android.Manifest
 import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
@@ -16,21 +17,39 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import com.example.hp.thejobmanager.adapters.SupervisorJobAdapter
 import com.example.hp.thejobmanager.adapters.WorkerJobAdapter
 import com.example.hp.thejobmanager.viewModel.WorkerJobViewModel
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.FirebaseAuth
 
 class WorkerJobsDisplayActivity : AppCompatActivity() {
 
     lateinit var jobAdapter:WorkerJobAdapter
+    lateinit var gso: GoogleSignInOptions
+    lateinit var mGoogleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worker_jobs_display)
+
+        var logout:Button=findViewById(R.id.logout)
+
+        logout.setOnClickListener { logout() }
+
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
 
         var recyclerview=findViewById<RecyclerView>(R.id.recyclerview)
@@ -59,6 +78,15 @@ class WorkerJobsDisplayActivity : AppCompatActivity() {
         }
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(recyclerview)
+    }
+    fun logout(){
+        FirebaseAuth.getInstance().signOut()
+        mGoogleSignInClient.signOut()
+
+        Toast.makeText(this, "logged out", Toast.LENGTH_LONG).show()
+
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 
 }
