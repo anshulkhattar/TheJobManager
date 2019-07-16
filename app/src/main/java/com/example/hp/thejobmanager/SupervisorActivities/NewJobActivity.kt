@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import android.location.Geocoder
 import com.example.hp.thejobmanager.R
+import com.example.hp.thejobmanager.SupervisorJobFragment
 import java.util.*
 
 
@@ -72,7 +73,7 @@ class NewJobActivity : AppCompatActivity() {
 
             Toast.makeText(this, "Job Added", Toast.LENGTH_SHORT).show()
 
-            val intent = Intent(this, AddJobActivity::class.java)
+            val intent = Intent(this, SupervisorJobFragment::class.java)
             startActivity(intent)
         }
 

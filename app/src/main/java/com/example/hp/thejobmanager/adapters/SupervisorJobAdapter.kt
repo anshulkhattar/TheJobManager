@@ -1,6 +1,5 @@
 package com.example.hp.thejobmanager.adapters
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -9,17 +8,17 @@ import android.view.ViewGroup
 import com.example.hp.thejobmanager.R
 import com.example.hp.thejobmanager.databinding.SupervisorJobCardBinding
 import com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel
-import com.example.hp.thejobmanager.SupervisorActivities.AddJobActivity
+import com.example.hp.thejobmanager.SupervisorJobFragment
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.ValueEventListener
 
 
-class SupervisorJobAdapter(private val context: Context, private val arrayList: ArrayList<SupervisorJobViewModel>,private val keyList:ArrayList<String>):
+class SupervisorJobAdapter(private val context: SupervisorJobFragment, private val arrayList: ArrayList<SupervisorJobViewModel>, private val keyList:ArrayList<String>):
     RecyclerView.Adapter<SupervisorJobAdapter.customView>() {
 
-    private val activity : AddJobActivity = context as AddJobActivity
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): customView {
