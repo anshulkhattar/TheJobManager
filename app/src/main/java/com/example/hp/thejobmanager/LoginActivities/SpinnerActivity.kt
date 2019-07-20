@@ -8,6 +8,7 @@ import android.widget.*
 import com.example.hp.thejobmanager.R
 import com.example.hp.thejobmanager.Supervisor.SupervisorActivity
 import com.example.hp.thejobmanager.WorkerActivities.WorkerJobsDisplayActivity
+import com.example.hp.thejobmanager.WorkerActivity
 import com.example.hp.thejobmanager.userDetailActivities.SupervisorDetailsActivity
 import com.example.hp.thejobmanager.userDetailActivities.WorkerDetailsActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -110,7 +111,7 @@ class SpinnerActivity : AppCompatActivity() {
 
     }
     fun goToWorkerJobs(){
-        val intent = Intent(this, WorkerJobsDisplayActivity::class.java)
+        val intent = Intent(this, WorkerActivity::class.java)
         startActivity(intent)
     }
     fun goToCreateJobs(){

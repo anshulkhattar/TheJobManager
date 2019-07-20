@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+            android:id="@+id/navigation_jobs"
+            android:icon="@drawable/ic_filter_list"
+            android:title="Available"/>
+
+    <item
+            android:id="@+id/navigation_accjobs"
+            android:icon="@drawable/ic_check"
+            android:title="Accepted"/>
+
+    <item
+            android:id="@+id/navigation_rejjobs"
+            android:icon="@drawable/ic_close"
+            android:title="Rejected"/>
+
+    <item
+            android:id="@+id/navigation_profile"
+            android:icon="@drawable/ic_person"
+            android:title="Profile"/>
+</menu>
