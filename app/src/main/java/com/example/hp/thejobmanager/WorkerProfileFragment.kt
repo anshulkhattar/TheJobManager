@@ -12,10 +12,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.hp.thejobmanager.LoginActivities.LoginActivity
+import com.example.hp.thejobmanager.models.Supervisor
+import com.example.hp.thejobmanager.models.Worker
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class WorkerProfileFragment : Fragment() {
@@ -53,31 +59,24 @@ class WorkerProfileFragment : Fragment() {
         name.text=auth.displayName
         Picasso.with(this.activity).load(auth.photoUrl).into(image)
         email.text=auth.email
-        phn.text="8529637415"
-        profile.text="Job profile"
 
 
-        //*FirebaseDatabase.getInstance().getReference("Supervisor").orderByChild("uemail").equalTo(auth.email)
-        /* .addValueEventListener(object : ValueEventListener {
+        var userListener= FirebaseDatabase.getInstance().getReference("Worker").child(FirebaseAuth.getInstance().currentUser!!.uid)
+        userListener.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
 
+            }
 
-             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                 if (dataSnapshot.exists()) {
+            override fun onDataChange(p0: DataSnapshot?) {
+                if(p0!!.exists()){
+                    var worker: Worker = p0.getValue(Worker::class.java)!!
 
-                     for (userSnapshot in dataSnapshot.children) {
-                         var user: Supervisor = userSnapshot.getValue(Supervisor::class.java)!!
+                    phn.text=worker.uphone
+                    profile.text=worker.uprofile
+                }
+            }
+        })
 
-                         phn.text=user.uphone
-
-                     }
-                 }
-
-             }
-
-             override fun onCancelled(databaseError: DatabaseError) {
-
-             }
-         })*/
 
         return view
 

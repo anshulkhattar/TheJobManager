@@ -12,10 +12,16 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.hp.thejobmanager.LoginActivities.LoginActivity
 import com.example.hp.thejobmanager.R
+import com.example.hp.thejobmanager.models.Supervisor
+import com.example.hp.thejobmanager.models.Worker
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class SupervisorProfileFragment : Fragment() {
@@ -53,30 +59,21 @@ class SupervisorProfileFragment : Fragment() {
         name.text=auth.displayName
         Picasso.with(this.activity).load(auth.photoUrl).into(image)
         email.text=auth.email
-        phn.text="8529637415"
 
+        var userListener= FirebaseDatabase.getInstance().getReference("Supervisor").child(FirebaseAuth.getInstance().currentUser!!.uid)
+        userListener.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError?) {
 
-        //*FirebaseDatabase.getInstance().getReference("Supervisor").orderByChild("uemail").equalTo(auth.email)
-           /* .addValueEventListener(object : ValueEventListener {
+            }
 
+            override fun onDataChange(p0: DataSnapshot?) {
+                if(p0!!.exists()){
+                    var supervisor:Supervisor= p0.getValue(Supervisor::class.java)!!
 
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    if (dataSnapshot.exists()) {
-
-                        for (userSnapshot in dataSnapshot.children) {
-                            var user: Supervisor = userSnapshot.getValue(Supervisor::class.java)!!
-
-                            phn.text=user.uphone
-
-                        }
-                    }
-
+                    phn.text=supervisor.uphone
                 }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-
-                }
-            })*/
+            }
+        })
 
         return view
     

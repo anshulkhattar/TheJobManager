@@ -57,10 +57,11 @@ class WorkerDetailsActivity : AppCompatActivity() {
             var profile: String = mProfile.text.toString()
             var emailid: String = mEmail.text.toString()
             var phnnum: String = mPhone.text.toString()
+            var id=FirebaseAuth.getInstance().currentUser!!.uid
 
 
             if (!name.isEmpty() && !emailid.isEmpty() && !phnnum.isEmpty() && !profile.isEmpty()) {
-                var worker = Worker(name, emailid, phnnum, profile, wlat, wlong)
+                var worker = Worker(name, emailid, phnnum, profile, wlat, wlong,id)
                 FirebaseDatabase.getInstance().getReference("Worker")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid)
                     .setValue(worker)

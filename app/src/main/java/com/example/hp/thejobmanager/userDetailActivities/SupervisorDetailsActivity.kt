@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.hp.thejobmanager.R
 import com.example.hp.thejobmanager.Supervisor.SupervisorActivity
+import com.example.hp.thejobmanager.models.Supervisor
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
@@ -28,9 +29,11 @@ class SupervisorDetailsActivity : AppCompatActivity() {
             var emailid: String = mEmail.text.toString()
             var phnnum: String = mPhone.text.toString()
 
+            var id:String=FirebaseAuth.getInstance().currentUser!!.uid
+
 
             if (!name.isEmpty() && !emailid.isEmpty() && !phnnum.isEmpty()) {
-                var supervisor = Supervisor(name, emailid, phnnum)
+                var supervisor = Supervisor(name, emailid, phnnum,id)
                 FirebaseDatabase.getInstance().getReference("Supervisor")
                     .child(FirebaseAuth.getInstance().currentUser!!.uid)
                     .setValue(supervisor)
@@ -51,4 +54,4 @@ class SupervisorDetailsActivity : AppCompatActivity() {
 
     }
 }
-data class Supervisor(val uname:String,val uemail:String,val uphone:String)
+
