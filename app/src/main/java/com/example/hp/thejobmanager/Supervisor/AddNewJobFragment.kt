@@ -1,7 +1,6 @@
-package com.example.hp.thejobmanager
+package com.example.hp.thejobmanager.Supervisor
 
 
-import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.hp.thejobmanager.SupervisorActivities.Job
+import com.example.hp.thejobmanager.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
@@ -49,7 +48,7 @@ class AddNewJobFragment : Fragment() {
         var date: String = mDate.text.toString()
 
 
-        val geocoder = Geocoder(this.activity, Locale.getDefault())
+        val geocoder = Geocoder(this.activity!!, Locale.getDefault())
         val addresses = geocoder.getFromLocationName(location, 1)
         val address = addresses[0]
         val longitude = address.longitude
@@ -92,3 +91,16 @@ class AddNewJobFragment : Fragment() {
     }
 
 }
+data class Job(
+    var jProfile:String,
+    var jDuration:String,
+    var jLocation:String,
+    var jRange:String,
+    var jPayment:String,
+    var jDate:String,
+    var jCreator:String,
+    var jStatus:String,
+    var jlat:Double,
+    var jlong: Double,
+    var jid:String
+)

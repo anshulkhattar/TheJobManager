@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import com.example.hp.thejobmanager.R
-import com.example.hp.thejobmanager.SupervisorActivity
+import com.example.hp.thejobmanager.Supervisor.SupervisorActivity
 import com.example.hp.thejobmanager.WorkerActivities.WorkerJobsDisplayActivity
 import com.example.hp.thejobmanager.userDetailActivities.SupervisorDetailsActivity
 import com.example.hp.thejobmanager.userDetailActivities.WorkerDetailsActivity

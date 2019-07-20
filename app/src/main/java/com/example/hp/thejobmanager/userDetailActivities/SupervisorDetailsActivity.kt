@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.hp.thejobmanager.R
-import com.example.hp.thejobmanager.SupervisorActivity
+import com.example.hp.thejobmanager.Supervisor.SupervisorActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 

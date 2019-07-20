@@ -1,13 +1,10 @@
-package com.example.hp.thejobmanager
+package com.example.hp.thejobmanager.Supervisor
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.support.v7.app.ActionBar
-import android.widget.Toast
-import android.databinding.adapters.CompoundButtonBindingAdapter.setChecked
-
+import com.example.hp.thejobmanager.R
 
 
 class SupervisorActivity : AppCompatActivity() {

@@ -1,11 +1,8 @@
-package com.example.hp.thejobmanager
+package com.example.hp.thejobmanager.Supervisor
 
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,18 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.hp.thejobmanager.LoginActivities.LoginActivity
-import com.example.hp.thejobmanager.adapters.WorkerJobAdapter
-import com.example.hp.thejobmanager.models.SupervisorJobs
-import com.example.hp.thejobmanager.userDetailActivities.Supervisor
-import com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel
+import com.example.hp.thejobmanager.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 
 class SupervisorProfileFragment : Fragment() {

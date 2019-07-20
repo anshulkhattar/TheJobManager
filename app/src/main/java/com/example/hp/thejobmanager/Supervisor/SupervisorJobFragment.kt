@@ -1,4 +1,4 @@
-package com.example.hp.thejobmanager
+package com.example.hp.thejobmanager.Supervisor
 
 
 import android.arch.lifecycle.ViewModelProviders
@@ -10,8 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.hp.thejobmanager.adapters.SupervisorJobAdapter
 import com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import com.example.hp.thejobmanager.R
 
 
 class SupervisorJobFragment : Fragment() {

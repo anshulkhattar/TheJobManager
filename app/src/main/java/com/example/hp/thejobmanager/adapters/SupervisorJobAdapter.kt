@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.example.hp.thejobmanager.R
 import com.example.hp.thejobmanager.databinding.SupervisorJobCardBinding
 import com.example.hp.thejobmanager.viewModel.SupervisorJobViewModel
-import com.example.hp.thejobmanager.SupervisorJobFragment
+import com.example.hp.thejobmanager.Supervisor.SupervisorJobFragment
 import com.google.firebase.database.*
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DataSnapshot
