@@ -1,5 +1,6 @@
 package com.example.hp.thejobmanager.LoginActivities
 
+import android.Manifest
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -18,6 +19,12 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.provider.Settings
+import android.support.v7.app.AlertDialog
+import android.support.v4.content.ContextCompat
+
 
 class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedListener {
     override fun onConnectionFailed(p0: ConnectionResult) {
@@ -35,6 +42,12 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+            showSettingAlert()
+        }
 
 
 
@@ -100,5 +113,20 @@ class LoginActivity : AppCompatActivity(), GoogleApiClient.OnConnectionFailedLis
 
 
             }
+    }
+
+    fun showSettingAlert() {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setTitle("Allow Location Access")
+        alertDialog.setMessage("Go to settings and give location permission to The Job Manager")
+        alertDialog.setPositiveButton("Setting") { dialog, which ->
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            val uri = Uri.fromParts("package", packageName, null)
+            intent.data = uri
+            startActivity(intent)
+        }
+        alertDialog.setNegativeButton("Cancel"
+        ) { dialog, which -> Toast.makeText(this,"Turn on location permission from settings.",Toast.LENGTH_SHORT).show() }
+        alertDialog.show()
     }
 }
