@@ -16,7 +16,6 @@ class WorkerActivity : AppCompatActivity() {
 
         val bottomNavigation: BottomNavigationView = findViewById(R.id.navigationView)
 
-        //replaceFragment(SupervisorJobFragment())
 
         bottomNavigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -26,12 +25,10 @@ class WorkerActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_accjobs -> {
-                    //replaceFragment(AddNewJobFragment())
                     Toast.makeText(this,"available",Toast.LENGTH_SHORT).show()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_rejjobs -> {
-                    //replaceFragment(AddNewJobFragment())
                     Toast.makeText(this,"available",Toast.LENGTH_SHORT).show()
                     return@OnNavigationItemSelectedListener true
                 }

@@ -39,7 +39,6 @@ class WorkerAvailableJobragment : Fragment() {
             jobAdapter = WorkerJobAdapter(this.activity!!, jobListViewModel!!, keys)
             recyclerview.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
 
-            //recyclerview!!.layoutManager = LinearLayoutManager(this@JobListActivity)
             recyclerview!!.adapter = jobAdapter
         })
         val swipeHandler = object : SwipeToDeleteCallback(this.activity!!) {

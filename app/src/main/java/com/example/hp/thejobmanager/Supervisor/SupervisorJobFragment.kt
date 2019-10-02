@@ -39,11 +39,10 @@ class SupervisorJobFragment : Fragment() {
 
             jobAdapter = SupervisorJobAdapter(this, jobListViewModel!!,keys)
 
-            //recyclerview!!.layoutManager = LinearLayoutManager(this@JobListActivity)
             recyclerview!!.adapter = jobAdapter
 
             recyclerview.layoutManager= LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
-            
+
         })
 
 

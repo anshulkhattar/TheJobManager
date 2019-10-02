@@ -55,7 +55,6 @@ class WorkerJobsDisplayActivity : AppCompatActivity() {
             jobAdapter = WorkerJobAdapter(this@WorkerJobsDisplayActivity, jobListViewModel!!,keys)
             recyclerview.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-            //recyclerview!!.layoutManager = LinearLayoutManager(this@JobListActivity)
             recyclerview!!.adapter = jobAdapter
         })
         val swipeHandler = object : SwipeToDeleteCallback(this) {
