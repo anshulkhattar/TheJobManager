@@ -72,9 +72,6 @@ class WorkerJobAdapter(private val context: Context, private val arrayList: Arra
                 }
             })
             Log.d("key111", keyList[position])
-            //jobListViewModel.keyList.removeAt(position)
-
-            //jobListViewModel.items.removeAt(position)
 
 
 
@@ -114,9 +111,6 @@ class WorkerJobAdapter(private val context: Context, private val arrayList: Arra
                 }
             })
             Log.d("key111", keyList[position])
-            //jobListViewModel.keyList.removeAt(position)
-
-            //jobListViewModel.items.removeAt(position)
 
 
 

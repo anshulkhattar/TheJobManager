@@ -70,7 +70,6 @@ class SupervisorJobAdapter(private val context: SupervisorJobFragment, private v
                             arrayList.removeAt(position)
 
                             notifyDataSetChanged()
-                            //notifyItemRangeChanged(position,itemCount-1)
 
                         }
                     }
@@ -80,7 +79,6 @@ class SupervisorJobAdapter(private val context: SupervisorJobFragment, private v
                 }
             })
             Log.d("key111", keyList[position])
-            //jobListViewModel.keyList.removeAt(position)
 
 
 

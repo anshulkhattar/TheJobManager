@@ -91,17 +91,6 @@ class SupervisorJobViewModel:ViewModel {
         Log.d("1111","reached 1")
 
 
-        /*val job1=SupervisorJobs("Cleaner","2hrs","100","me","5km","asdfg","08/07/19","new")
-        val job2=SupervisorJobs("hair dresser","2hrs","100","me","5km","asdfg","08/07/19","new")
-        Log.d("2222","reached 2")
-        val jobListViewModel1= SupervisorJobViewModel(job1)
-        val jobListViewModel2 =SupervisorJobViewModel(job2)
-        Log.d("3333","reached 3")
-        arrayList!!.add(jobListViewModel1)
-        arrayList!!.add(jobListViewModel2)
-        arrayListMutableLiveData.value=arrayList*/
-
-
         return arrayListMutableLiveData
     }
     fun getKey(): ArrayList<String> {
